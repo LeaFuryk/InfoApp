@@ -3,6 +3,7 @@ package com.example.infoapp;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -40,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void createSpinner(){
         final String[] items = new String[]{"1", "2", "3"};
-        View view = viewFactory.spinner(this,items, new AdapterView.OnItemSelectedListener() {
+        String question = "This is a question";
+        View view = viewFactory.spinner(this, question, items, new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Toast toast1 =
@@ -55,13 +57,15 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        view.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         linearLayout.addView(view);
     }
 
     private void createRadioButton() {
 
         String [] options = {"primera","segunda","tercera"};
-         View radioGroup = viewFactory.radioGroup(this, options, new RadioGroup.OnCheckedChangeListener() {
+        String question = "¿Como saliste en la carrera?";
+         View radioGroup = viewFactory.radioGroup(this, question, options, new RadioGroup.OnCheckedChangeListener() {
              @Override
              public void onCheckedChanged(RadioGroup group, int checkedId) {
                  Toast toast1 =
@@ -78,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void calendar(){
         EditText editText = new EditText(this.getApplicationContext());
-        linearLayout.addView(viewFactory.datePicker(this,editText));
+        String question = "Birth day: ";
+        View calendarView = viewFactory.datePicker(this, question, editText);
+        linearLayout.addView(calendarView);
     }
 }

@@ -10,12 +10,12 @@ import android.widget.RadioGroup;
 
 public interface ViewFactory {
 
-    View datePicker(@NonNull Context context,@NonNull EditText answerField);
+    View datePicker(@NonNull Context context, @Nullable String question, @NonNull EditText answerField);
 
     View editTextField(@NonNull Context context, @NonNull String hint);
 
-    View radioGroup(@NonNull Context context, @Nullable String [] options, @NonNull RadioGroup.OnCheckedChangeListener listener);
+    View radioGroup(@NonNull Context context,@Nullable String question, @Nullable String [] options, @NonNull RadioGroup.OnCheckedChangeListener listener);
 
-    View spinner(@NonNull Context context, @Nullable String [] options, @NonNull AdapterView.OnItemSelectedListener listener);
+    View spinner(@NonNull Context context, @Nullable String question, @Nullable String [] options, @NonNull AdapterView.OnItemSelectedListener listener);
 
 }

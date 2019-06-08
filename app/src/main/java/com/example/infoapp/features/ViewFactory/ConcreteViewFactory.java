@@ -2,6 +2,7 @@ package com.example.infoapp.features.ViewFactory;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.infoapp.R;
 
@@ -26,14 +28,24 @@ import static java.util.Calendar.getInstance;
 public class ConcreteViewFactory implements ViewFactory {
 
     @Override
-    public View datePicker(Context context, EditText answerField) {
+    public View datePicker(Context context, String question, EditText answerField) {
 
-        final LinearLayout layout = this.basicLayout(context);
-        layout.setOrientation(LinearLayout.HORIZONTAL);
+        LinearLayout layout = this.basicLayout(context);
+        layout.setOrientation(LinearLayout.VERTICAL);
+
+        final TextView textView = new TextView(context);
+        textView.setTextSize(17);
+        textView.setTextColor(Color.BLACK);
+        textView.setText(question);
+
+        layout.addView(textView);
+
+        final LinearLayout dateLayout = this.basicLayout(context);
+        dateLayout.setOrientation(LinearLayout.HORIZONTAL);
 
         answerField.setHint("dd/mm/yyyy");
 
-        layout.addView(answerField);
+        dateLayout.addView(answerField);
 
         final ImageButton mButton;
         mButton = new ImageButton(context);
@@ -61,22 +73,34 @@ public class ConcreteViewFactory implements ViewFactory {
                 recogerFecha.show();
             }
         });
-
-        layout.addView(mButton);
+        dateLayout.addView(mButton);
+        layout.addView(dateLayout);
 
         return layout;
     }
 
     @Override
     public View editTextField(@NonNull Context context, @NonNull String hint) {
+
         EditText editText = new EditText(context);
         editText.setHint(hint);
         editText.setId(0);
-        return editText;
+
+        return this.setLayoutParams(editText);
     }
 
     @Override
-    public View radioGroup(@NonNull Context context, @Nullable String[] options, @NonNull RadioGroup.OnCheckedChangeListener listener) {
+    public View radioGroup(@NonNull Context context, String question, @Nullable String[] options, @NonNull RadioGroup.OnCheckedChangeListener listener) {
+
+        LinearLayout layout = this.basicLayout(context);
+        layout.setOrientation(LinearLayout.VERTICAL);
+
+        final TextView textView = new TextView(context);
+        textView.setTextSize(17);
+        textView.setTextColor(Color.BLACK);
+        textView.setText(question);
+
+        layout.addView(textView);
 
         final RadioButton[] radioButton = new RadioButton[options.length];
         RadioGroup radioGroup = new RadioGroup(context.getApplicationContext()); //create the RadioGroup
@@ -85,29 +109,51 @@ public class ConcreteViewFactory implements ViewFactory {
             radioButton[i]  = new RadioButton(context.getApplicationContext());
             radioButton[i].setText(options[i]);
             radioButton[i].setId(i);
+            radioButton[i].setTextSize(17);
+            radioButton[i].setTextColor(Color.BLACK);
             radioGroup.addView(radioButton[i]);
         }
-
         radioGroup.setOnCheckedChangeListener(listener);
 
-        return radioGroup;
+        layout.addView(radioGroup);
+
+        return layout;
     }
 
     @Override
-    public View spinner(@NonNull Context context, @Nullable String[] options, @NonNull AdapterView.OnItemSelectedListener listener) {
+    public View spinner(@NonNull Context context, String question, @Nullable String[] options, @NonNull AdapterView.OnItemSelectedListener listener) {
+
+        LinearLayout layout = this.basicLayout(context);
+        layout.setOrientation(LinearLayout.HORIZONTAL);
 
         final Spinner dropDown = new Spinner(context);
         final ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, options);
         dropDown.setAdapter(adapter);
         dropDown.setOnItemSelectedListener(listener);
 
-        return dropDown;
+
+
+        final TextView textView = new TextView(context);
+        textView.setTextSize(17);
+        textView.setTextColor(Color.BLACK);
+        textView.setText(question);
+
+        layout.addView(textView);
+        layout.addView(dropDown);
+        return layout;
     }
 
     private @NonNull LinearLayout basicLayout(Context context){
-        final ViewGroup.LayoutParams layoutParams= new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
-        final LinearLayout layout = new LinearLayout(context);
-        layout.setLayoutParams(layoutParams);
+        LinearLayout layout = new LinearLayout(context);
+        layout = (LinearLayout) this.setLayoutParams(layout);
         return layout;
+    }
+
+    private View setLayoutParams(View view){
+        final ViewGroup.LayoutParams layoutParams= new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        ((LinearLayout.LayoutParams) layoutParams).setMargins(5,15,5,15);
+        view.setLayoutParams(layoutParams);
+
+        return view;
     }
 }
