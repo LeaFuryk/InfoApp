@@ -7,10 +7,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 public interface ViewFactory {
 
-    View datePicker(@NonNull Context context, @Nullable String question, @NonNull EditText answerField);
+    View datePicker(@NonNull Context context, @Nullable String question, @NonNull TextView answerField);
 
     View editTextField(@NonNull Context context, @NonNull String hint);
 

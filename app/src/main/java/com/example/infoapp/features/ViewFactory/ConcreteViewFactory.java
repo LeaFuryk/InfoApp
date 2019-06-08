@@ -28,24 +28,21 @@ import static java.util.Calendar.getInstance;
 public class ConcreteViewFactory implements ViewFactory {
 
     @Override
-    public View datePicker(Context context, String question, EditText answerField) {
+    public View datePicker(Context context, String question, TextView answerField) {
 
         LinearLayout layout = this.basicLayout(context);
         layout.setOrientation(LinearLayout.VERTICAL);
 
         final TextView textView = new TextView(context);
-        textView.setTextSize(17);
-        textView.setTextColor(Color.BLACK);
         textView.setText(question);
 
-        layout.addView(textView);
+        layout.addView(this.setStyleSheet(textView));
 
         final LinearLayout dateLayout = this.basicLayout(context);
         dateLayout.setOrientation(LinearLayout.HORIZONTAL);
 
         answerField.setHint("dd/mm/yyyy");
-
-        dateLayout.addView(answerField);
+        dateLayout.addView(this.setStyleSheet(answerField));
 
         final ImageButton mButton;
         mButton = new ImageButton(context);
@@ -56,23 +53,24 @@ public class ConcreteViewFactory implements ViewFactory {
             @Override
             public void onClick(View v) {
 
-                DatePickerDialog recogerFecha = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog datePicker = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         //Esta variable lo que realiza es aumentar en uno el mes ya que comienza desde 0 = enero
-                        final int mesActual = month + 1;
+                        final int actualMonth = month + 1;
                         //Formateo el día obtenido: antepone el 0 si son menores de 10
-                        final String diaFormateado = (dayOfMonth < 10)? "0" + String.valueOf(dayOfMonth):String.valueOf(dayOfMonth);
+                        final String formatedDay = (dayOfMonth < 10)? "0" + String.valueOf(dayOfMonth):String.valueOf(dayOfMonth);
                         //Formateo el mes obtenido: antepone el 0 si son menores de 10
-                        final String mesFormateado = (mesActual < 10)? "0" + String.valueOf(mesActual):String.valueOf(mesActual);
+                        final String formatedMonth = (actualMonth < 10)? "0" + String.valueOf(actualMonth):String.valueOf(actualMonth);
                         //Muestro la fecha con el formato deseado
-                        answerField.setText(diaFormateado + "/" + mesFormateado + "/" + year);
+                        answerField.setText(formatedDay + "/" + formatedMonth + "/" + year);
                     }
                 }, getInstance().get(YEAR), getInstance().get(MONTH), getInstance().get(DAY_OF_MONTH));
                 //Muestro el widget
-                recogerFecha.show();
+                datePicker.show();
             }
         });
+        mButton.setPadding(20,0,0,0);
         dateLayout.addView(mButton);
         layout.addView(dateLayout);
 
@@ -86,7 +84,7 @@ public class ConcreteViewFactory implements ViewFactory {
         editText.setHint(hint);
         editText.setId(0);
 
-        return this.setLayoutParams(editText);
+        return this.setLayoutParams(this.setStyleSheet(editText));
     }
 
     @Override
@@ -96,11 +94,9 @@ public class ConcreteViewFactory implements ViewFactory {
         layout.setOrientation(LinearLayout.VERTICAL);
 
         final TextView textView = new TextView(context);
-        textView.setTextSize(17);
-        textView.setTextColor(Color.BLACK);
         textView.setText(question);
 
-        layout.addView(textView);
+        layout.addView(this.setStyleSheet(textView));
 
         final RadioButton[] radioButton = new RadioButton[options.length];
         RadioGroup radioGroup = new RadioGroup(context.getApplicationContext()); //create the RadioGroup
@@ -109,12 +105,10 @@ public class ConcreteViewFactory implements ViewFactory {
             radioButton[i]  = new RadioButton(context.getApplicationContext());
             radioButton[i].setText(options[i]);
             radioButton[i].setId(i);
-            radioButton[i].setTextSize(17);
-            radioButton[i].setTextColor(Color.BLACK);
-            radioGroup.addView(radioButton[i]);
+            radioGroup.addView(this.setStyleSheet(radioButton[i]));
         }
         radioGroup.setOnCheckedChangeListener(listener);
-
+        radioGroup.setPadding(0,10,0,0);
         layout.addView(radioGroup);
 
         return layout;
@@ -124,7 +118,11 @@ public class ConcreteViewFactory implements ViewFactory {
     public View spinner(@NonNull Context context, String question, @Nullable String[] options, @NonNull AdapterView.OnItemSelectedListener listener) {
 
         LinearLayout layout = this.basicLayout(context);
-        layout.setOrientation(LinearLayout.HORIZONTAL);
+        if(question.length() < 25){
+            layout.setOrientation(LinearLayout.HORIZONTAL);
+        } else {
+            layout.setOrientation(LinearLayout.VERTICAL);
+        }
 
         final Spinner dropDown = new Spinner(context);
         final ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, options);
@@ -134,11 +132,9 @@ public class ConcreteViewFactory implements ViewFactory {
 
 
         final TextView textView = new TextView(context);
-        textView.setTextSize(17);
-        textView.setTextColor(Color.BLACK);
         textView.setText(question);
 
-        layout.addView(textView);
+        layout.addView(this.setStyleSheet(textView));
         layout.addView(dropDown);
         return layout;
     }
@@ -151,9 +147,17 @@ public class ConcreteViewFactory implements ViewFactory {
 
     private View setLayoutParams(View view){
         final ViewGroup.LayoutParams layoutParams= new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-        ((LinearLayout.LayoutParams) layoutParams).setMargins(5,15,5,15);
+        ((LinearLayout.LayoutParams) layoutParams).setMargins(5,20,5,20);
         view.setLayoutParams(layoutParams);
 
         return view;
     }
+
+    private TextView setStyleSheet(TextView textView){
+        textView.setTextColor(Color.WHITE);
+        textView.setHintTextColor(Color.WHITE);
+        textView.setTextSize(20);
+        return textView;
+    }
 }
+

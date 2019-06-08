@@ -1,13 +1,15 @@
 package com.example.infoapp;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.infoapp.features.ViewFactory.ConcreteViewFactory;
@@ -30,18 +32,18 @@ public class MainActivity extends AppCompatActivity {
         this.generateInputTextField("Apellido: ");
 
         this.createSpinner();
-        createRadioButton();
-        calendar();
+        this.createRadioButton();
+        this.calendar();
     }
 
     public void generateInputTextField(String title){
         View view = viewFactory.editTextField(this.getApplicationContext(),title);
-        linearLayout.addView(view);
+        this.addToLayoutOnCardView(view);
     }
 
     public void createSpinner(){
         final String[] items = new String[]{"1", "2", "3"};
-        String question = "This is a question";
+        String question = "This is a very very very vyer long question";
         View view = viewFactory.spinner(this, question, items, new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -58,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         view.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        linearLayout.addView(view);
+        this.addToLayoutOnCardView(view);
     }
 
     private void createRadioButton() {
@@ -76,14 +78,21 @@ public class MainActivity extends AppCompatActivity {
              }
          });
 
-        linearLayout.addView(radioGroup);//you add the whole RadioGroup to the layout
+        this.addToLayoutOnCardView(radioGroup);
 
     }
 
     public void calendar(){
-        EditText editText = new EditText(this.getApplicationContext());
+        TextView editText = new TextView(this.getApplicationContext());
         String question = "Birth day: ";
         View calendarView = viewFactory.datePicker(this, question, editText);
-        linearLayout.addView(calendarView);
+        this.addToLayoutOnCardView(calendarView);
+    }
+
+    private void addToLayoutOnCardView(View view){
+        CardView cardView = new CardView(this.getApplicationContext());
+        cardView.addView(view);
+        cardView.setCardBackgroundColor(Color.parseColor("#81A6F1"));
+        linearLayout.addView(cardView);
     }
 }
