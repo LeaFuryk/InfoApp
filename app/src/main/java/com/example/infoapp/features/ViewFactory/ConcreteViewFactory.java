@@ -6,12 +6,15 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 
 import com.example.infoapp.R;
 
@@ -88,6 +91,17 @@ public class ConcreteViewFactory implements ViewFactory {
         radioGroup.setOnCheckedChangeListener(listener);
 
         return radioGroup;
+    }
+
+    @Override
+    public View spinner(@NonNull Context context, @Nullable String[] options, @NonNull AdapterView.OnItemSelectedListener listener) {
+
+        final Spinner dropDown = new Spinner(context);
+        final ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, options);
+        dropDown.setAdapter(adapter);
+        dropDown.setOnItemSelectedListener(listener);
+
+        return dropDown;
     }
 
     private @NonNull LinearLayout basicLayout(Context context){

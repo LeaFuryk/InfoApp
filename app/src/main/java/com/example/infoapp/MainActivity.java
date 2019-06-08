@@ -1,17 +1,12 @@
 package com.example.infoapp;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.infoapp.features.ViewFactory.ConcreteViewFactory;
@@ -44,14 +39,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void createSpinner(){
-        Spinner dropDown = new Spinner(this.getApplicationContext());
-        final String[] items = new String[]{"1", "2", "three"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
-        dropDown.setAdapter(adapter);
-        dropDown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        final String[] items = new String[]{"1", "2", "3"};
+        View view = viewFactory.spinner(this,items, new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                generateInputTextField(items[position]);
+                Toast toast1 =
+                        Toast.makeText(getApplicationContext(),
+                                items[position], Toast.LENGTH_SHORT);
+
+                toast1.show();
             }
 
             @Override
@@ -59,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        linearLayout.addView(dropDown);
+        linearLayout.addView(view);
     }
 
     private void createRadioButton() {
