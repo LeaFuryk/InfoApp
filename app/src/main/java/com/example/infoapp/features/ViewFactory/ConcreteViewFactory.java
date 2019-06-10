@@ -70,7 +70,7 @@ public class ConcreteViewFactory implements ViewFactory {
                 datePicker.show();
             }
         });
-        mButton.setPadding(20,0,0,0);
+        mButton.setPadding(25,0,0,0);
         dateLayout.addView(mButton);
         layout.addView(dateLayout);
 
@@ -147,7 +147,7 @@ public class ConcreteViewFactory implements ViewFactory {
 
     private View setLayoutParams(View view){
         final ViewGroup.LayoutParams layoutParams= new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-        ((LinearLayout.LayoutParams) layoutParams).setMargins(5,20,5,20);
+        ((LinearLayout.LayoutParams) layoutParams).setMargins(5,40,5,40);
         view.setLayoutParams(layoutParams);
 
         return view;
