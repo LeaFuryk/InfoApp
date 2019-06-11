@@ -2,7 +2,9 @@ package com.example.infoapp.features.ViewFactory;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -83,6 +85,10 @@ public class ConcreteViewFactory implements ViewFactory {
         EditText editText = new EditText(context);
         editText.setHint(hint);
         editText.setId(0);
+        editText.setTextColor(Color.WHITE);
+        editText.setHighlightColor(Color.WHITE);
+        editText.setLinkTextColor(Color.WHITE);
+        editText.getBackground().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
 
         return this.setLayoutParams(this.setStyleSheet(editText));
     }
@@ -101,10 +107,12 @@ public class ConcreteViewFactory implements ViewFactory {
         final RadioButton[] radioButton = new RadioButton[options.length];
         RadioGroup radioGroup = new RadioGroup(context.getApplicationContext()); //create the RadioGroup
         radioGroup.setOrientation(RadioGroup.VERTICAL);//or RadioGroup.VERTICAL
+
         for(int i=0; i<options.length; i++){
             radioButton[i]  = new RadioButton(context.getApplicationContext());
             radioButton[i].setText(options[i]);
             radioButton[i].setId(i);
+            radioButton[i].setButtonTintList(ColorStateList.valueOf(Color.WHITE));
             radioGroup.addView(this.setStyleSheet(radioButton[i]));
         }
         radioGroup.setOnCheckedChangeListener(listener);
@@ -127,8 +135,8 @@ public class ConcreteViewFactory implements ViewFactory {
         final Spinner dropDown = new Spinner(context);
         final ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, options);
         dropDown.setAdapter(adapter);
+        dropDown.setBackgroundTintList(ColorStateList.valueOf(Color.WHITE));
         dropDown.setOnItemSelectedListener(listener);
-
 
 
         final TextView textView = new TextView(context);

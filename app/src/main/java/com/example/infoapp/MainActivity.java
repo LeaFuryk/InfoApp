@@ -7,6 +7,7 @@ import android.support.v7.widget.CardView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -19,11 +20,14 @@ public class MainActivity extends AppCompatActivity {
 
     private ViewFactory viewFactory;
     private LinearLayout linearLayout;
+    private Button imageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        imageButton = findViewById(R.id.register_button);
+        imageButton.setBackgroundResource(R.drawable.tags_rounded_corners);
         viewFactory = new ConcreteViewFactory();
 
         linearLayout = findViewById(R.id.linear_layout);
