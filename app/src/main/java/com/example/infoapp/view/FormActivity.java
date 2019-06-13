@@ -1,4 +1,4 @@
-package com.example.infoapp;
+package com.example.infoapp.view;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.infoapp.R;
 import com.example.infoapp.features.ViewFactory.ConcreteViewFactory;
 import com.example.infoapp.features.ViewFactory.ViewFactory;
 

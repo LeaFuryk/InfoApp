@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.infoapp.view.FormActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     private Button newFormButton;
