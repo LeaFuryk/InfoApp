@@ -16,12 +16,15 @@ import android.widget.Toast;
 import com.example.infoapp.R;
 import com.example.infoapp.features.ViewFactory.ConcreteViewFactory;
 import com.example.infoapp.features.ViewFactory.ViewFactory;
+import com.example.infoapp.presenter.FormPresenter;
 
 public class FormActivity extends AppCompatActivity {
 
     private ViewFactory viewFactory;
     private LinearLayout linearLayout;
     private Button imageButton;
+
+    private FormPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +37,7 @@ public class FormActivity extends AppCompatActivity {
 
         linearLayout = findViewById(R.id.linear_layout);
 
-        this.generateInputTextField("Nombre: ");
-        this.generateInputTextField("Apellido: ");
-
-        this.createSpinner();
-        this.createRadioButton();
-        this.calendar();
+        presenter = new FormPresenter(this);
     }
 
     public void generateInputTextField(String title){
@@ -47,9 +45,7 @@ public class FormActivity extends AppCompatActivity {
         this.addToLayoutOnCardView(view);
     }
 
-    public void createSpinner(){
-        final String[] items = new String[]{"1", "2", "3"};
-        String question = "This is a very very very vyer long question";
+    public void createSpinner(String question, String[] items){
         View view = viewFactory.spinner(this, question, items, new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -88,9 +84,8 @@ public class FormActivity extends AppCompatActivity {
 
     }
 
-    public void calendar(){
+    public void calendar(String question){
         TextView editText = new TextView(this.getApplicationContext());
-        String question = "Birth day: ";
         View calendarView = viewFactory.datePicker(this, question, editText);
         this.addToLayoutOnCardView(calendarView);
     }
