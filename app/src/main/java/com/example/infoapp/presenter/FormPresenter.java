@@ -7,7 +7,7 @@ import com.example.infoapp.features.Models.QuestionType;
 import com.example.infoapp.model.FormViewModel;
 import com.example.infoapp.view.FormActivity;
 
-import java.util.Iterator;
+import java.util.ArrayList;
 
 public class FormPresenter implements FormItemActioner {
 
@@ -18,9 +18,9 @@ public class FormPresenter implements FormItemActioner {
         this.view = view;
         model = new FormViewModel();
         Form form = model.getForm();
-        Iterator<FormItemAction> items = form.getItems();
-        while (items.hasNext()){
-            items.next().execute(this);
+
+        for (FormItemAction item: form.getItems()) {
+            item.execute(this);
         }
     }
 
@@ -32,16 +32,14 @@ public class FormPresenter implements FormItemActioner {
         view.calendar(question);
     }
 
-    private void createSpinner(String question, Iterator<String> options){
+    private void createSpinner(String question, ArrayList<String> options){
         view.createSpinner(question, this.adaptOptions(options));
     }
 
-    private String[] adaptOptions(Iterator<String> options){
-        String[] result = new String[100];
-        int i = 0;
-        while (options.hasNext()){
-            result[i] = options.next();
-            i++;
+    private String[] adaptOptions(ArrayList<String> options){
+        String[] result = new String[options.size()];
+        for (int i= 0; i < options.size(); i++){
+            result[i] = options.get(i);
         }
         return result;
     }
@@ -56,7 +54,7 @@ public class FormPresenter implements FormItemActioner {
     }
 
     @Override
-    public void executeWithOptions(String question, Iterator<String> options, QuestionType type) {
+    public void executeWithOptions(String question, ArrayList<String> options, QuestionType type) {
         this.createSpinner(question,options);
     }
 }

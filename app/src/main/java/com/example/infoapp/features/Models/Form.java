@@ -1,7 +1,6 @@
 package com.example.infoapp.features.Models;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Form {
     private ArrayList<FormItemAction> items;
@@ -26,7 +25,7 @@ public class Form {
         return items.size();
     }
 
-    public Iterator<FormItemAction> getItems(){
-        return items.iterator();
+    public ArrayList<FormItemAction> getItems(){
+        return items;
     }
 }

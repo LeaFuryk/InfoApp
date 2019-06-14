@@ -1,7 +1,6 @@
 package com.example.infoapp.features.Models;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class OptionItem extends QuestionItem implements FormItemAction{
 
@@ -12,8 +11,8 @@ public class OptionItem extends QuestionItem implements FormItemAction{
         this.options = options;
     }
 
-    public Iterator<String> getOptions(){
-        return options.iterator();
+    public ArrayList<String> getOptions(){
+        return options;
     }
 
     public void addOption(String option){
