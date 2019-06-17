@@ -6,7 +6,7 @@ public class Form {
     private ArrayList<FormItemAction> items;
 
     public Form(){
-        items = new ArrayList<FormItemAction>();
+        items = new ArrayList<>();
     }
 
     public Form(ArrayList<FormItemAction> items){
