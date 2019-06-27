@@ -2,11 +2,11 @@ package com.example.infoapp.features.Models;
 
 import java.util.ArrayList;
 
-public class OptionItem extends QuestionItem implements FormItemAction{
+public class OptionItem extends QuestionItem implements FormItem {
 
     private ArrayList<String> options;
 
-    public OptionItem(String question, QuestionType type, ArrayList<String> options) {
+    public OptionItem(String question, FormItemType type, ArrayList<String> options) {
         super(question, type);
         this.options = options;
     }
@@ -28,7 +28,7 @@ public class OptionItem extends QuestionItem implements FormItemAction{
     }
 
     @Override
-    public void execute(FormItemActioner actioner) {
-        actioner.executeWithOptions(super.getQuestion(),this.getOptions(), super.getType());
+    public void execute(FormItemReceiver actioner) {
+        actioner.receive(super.getQuestion(),this.getOptions(), super.getType());
     }
 }

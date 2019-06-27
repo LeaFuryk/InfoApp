@@ -1,26 +1,18 @@
 package com.example.infoapp.view;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RadioGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.infoapp.R;
-import com.example.infoapp.features.ViewFactory.ConcreteViewFactory;
-import com.example.infoapp.features.ViewFactory.ViewFactory;
+import com.example.infoapp.features.Models.FormItemType;
+import com.example.infoapp.features.ViewFactory.AbstractViewFactory;
+import com.example.infoapp.features.ViewModels.FormItemView;
 import com.example.infoapp.presenter.FormPresenter;
 
 public class FormActivity extends AppCompatActivity {
 
-    private ViewFactory viewFactory;
     private LinearLayout linearLayout;
     private Button imageButton;
 
@@ -33,67 +25,14 @@ public class FormActivity extends AppCompatActivity {
 
         imageButton = findViewById(R.id.register_button);
         imageButton.setBackgroundResource(R.drawable.tags_rounded_corners);
-        viewFactory = new ConcreteViewFactory();
 
         linearLayout = findViewById(R.id.linear_layout);
 
         presenter = new FormPresenter(this);
     }
 
-    public void generateInputTextField(String title){
-        View view = viewFactory.editTextField(this.getApplicationContext(),title);
-        this.addToLayoutOnCardView(view);
-    }
-
-    public void createSpinner(String question, String[] items){
-        View view = viewFactory.spinner(this, question, items, new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast toast1 =
-                        Toast.makeText(getApplicationContext(),
-                                items[position], Toast.LENGTH_SHORT);
-
-                toast1.show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        view.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        this.addToLayoutOnCardView(view);
-    }
-
-    private void createRadioButton() {
-
-        String [] options = {"primera","segunda","tercera"};
-        String question = "¿Como saliste en la carrera?";
-        View radioGroup = viewFactory.radioGroup(this, question, options, new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                Toast toast1 =
-                        Toast.makeText(getApplicationContext(),
-                                options[checkedId], Toast.LENGTH_SHORT);
-
-                toast1.show();
-            }
-        });
-
-        this.addToLayoutOnCardView(radioGroup);
-
-    }
-
-    public void calendar(String question){
-        TextView editText = new TextView(this.getApplicationContext());
-        View calendarView = viewFactory.datePicker(this, question, editText);
-        this.addToLayoutOnCardView(calendarView);
-    }
-
-    private void addToLayoutOnCardView(View view){
-        CardView cardView = new CardView(this.getApplicationContext());
-        cardView.addView(view);
-        cardView.setCardBackgroundColor(Color.parseColor("#81A6F1"));
-        linearLayout.addView(cardView);
+    public void drawItem(final String question, final String[] options, final FormItemType type){
+        FormItemView itemView =AbstractViewFactory.provide(this,type,question,options);
+        linearLayout.addView(itemView);
     }
 }

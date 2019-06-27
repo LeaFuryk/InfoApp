@@ -1,15 +1,15 @@
 package com.example.infoapp.presenter;
 
 import com.example.infoapp.features.Models.Form;
-import com.example.infoapp.features.Models.FormItemAction;
-import com.example.infoapp.features.Models.FormItemActioner;
-import com.example.infoapp.features.Models.QuestionType;
+import com.example.infoapp.features.Models.FormItem;
+import com.example.infoapp.features.Models.FormItemReceiver;
+import com.example.infoapp.features.Models.FormItemType;
 import com.example.infoapp.model.FormViewModel;
 import com.example.infoapp.view.FormActivity;
 
 import java.util.ArrayList;
 
-public class FormPresenter implements FormItemActioner {
+public class FormPresenter implements FormItemReceiver {
 
     private FormActivity view;
     private FormViewModel model;
@@ -19,21 +19,9 @@ public class FormPresenter implements FormItemActioner {
         model = new FormViewModel();
         Form form = model.getForm();
 
-        for (FormItemAction item: form.getItems()) {
+        for (FormItem item: form.getItems()) {
             item.execute(this);
         }
-    }
-
-    public void createTextView(String question){
-        view.generateInputTextField(question);
-    }
-
-    public void createDatePicker(String question){
-        view.calendar(question);
-    }
-
-    private void createSpinner(String question, ArrayList<String> options){
-        view.createSpinner(question, this.adaptOptions(options));
     }
 
     private String[] adaptOptions(ArrayList<String> options){
@@ -45,16 +33,11 @@ public class FormPresenter implements FormItemActioner {
     }
 
     @Override
-    public void executeWithQuestion(String question, QuestionType type) {
-        if(type == QuestionType.TEXT_VIEW){
-            this.createTextView(question);
-        }else{
-            this.createDatePicker(question);
+    public void receive(String question, ArrayList<String> options, FormItemType type) {
+        if (options != null) {
+            view.drawItem(question, this.adaptOptions(options), type);
+        }else {
+            view.drawItem(question, null, type);
         }
-    }
-
-    @Override
-    public void executeWithOptions(String question, ArrayList<String> options, QuestionType type) {
-        this.createSpinner(question,options);
     }
 }
