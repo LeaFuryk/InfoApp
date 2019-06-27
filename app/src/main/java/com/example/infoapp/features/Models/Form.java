@@ -3,29 +3,29 @@ package com.example.infoapp.features.Models;
 import java.util.ArrayList;
 
 public class Form {
-    private ArrayList<FormItemAction> items;
+    private ArrayList<FormItem> items;
 
     public Form(){
-        items = new ArrayList<FormItemAction>();
+        items = new ArrayList<>();
     }
 
-    public Form(ArrayList<FormItemAction> items){
+    public Form(ArrayList<FormItem> items){
         this.items = items;
     }
 
-    public void addItem(FormItemAction item){
+    public void addItem(FormItem item){
         this.items.add(item);
     }
 
-    public void removeItem(FormItemAction item){
+    public void removeItem(FormItem item){
         this.items.remove(item);
     }
 
-    public int count(){
+    public int size(){
         return items.size();
     }
 
-    public ArrayList<FormItemAction> getItems(){
+    public ArrayList<FormItem> getItems(){
         return items;
     }
 }

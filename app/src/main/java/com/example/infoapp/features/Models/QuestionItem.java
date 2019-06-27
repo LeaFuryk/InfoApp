@@ -1,11 +1,11 @@
 package com.example.infoapp.features.Models;
 
-public class QuestionItem implements FormItemAction{
+public class QuestionItem implements FormItem {
 
     private String question;
-    private QuestionType type;
+    private FormItemType type;
 
-    public QuestionItem(String question, QuestionType type){
+    public QuestionItem(String question, FormItemType type){
         this.question = question;
         this.type = type;
     }
@@ -18,16 +18,16 @@ public class QuestionItem implements FormItemAction{
         this.question = question;
     }
 
-    public QuestionType getType(){
+    public FormItemType getType(){
         return this.type;
     }
 
-    public void setType(QuestionType type) {
+    public void setType(FormItemType type) {
         this.type = type;
     }
 
     @Override
-    public void execute(FormItemActioner actioner) {
-        actioner.executeWithQuestion(this.question, this.type);
+    public void execute(FormItemReceiver actioner) {
+        actioner.receive(this.question, null, this.type);
     }
 }
