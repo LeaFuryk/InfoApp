@@ -6,9 +6,11 @@ import com.example.infoapp.features.Models.Form;
 import com.example.infoapp.features.Models.FormItemType;
 import com.example.infoapp.features.Models.OptionItem;
 import com.example.infoapp.features.Models.QuestionItem;
+import com.example.infoapp.features.Storage.AnswerStorage;
 import com.example.infoapp.features.Storage.FormStorage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class FormViewModel{
 
@@ -41,5 +43,9 @@ public class FormViewModel{
         FormStorage.getInstance().save(context,form);
 
         return FormStorage.getInstance().get(context,id);
+    }
+
+    public void saveAnswers(Context context, HashMap<String,String> answers){
+        AnswerStorage.getInstance().save(context,answers);
     }
 }

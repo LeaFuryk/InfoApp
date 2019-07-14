@@ -70,6 +70,7 @@ public class DatePickerFactory implements ViewFactory {
         });
         mButton.setPadding(25,0,0,0);
         dateLayout.addView(mButton);
+        formView.setQuestion(question);
         formView.addView(dateLayout);
 
         return formView;

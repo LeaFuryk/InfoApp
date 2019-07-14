@@ -8,6 +8,7 @@ import com.example.infoapp.model.FormViewModel;
 import com.example.infoapp.view.FormActivity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class FormPresenter implements FormItemReceiver {
 
@@ -30,6 +31,10 @@ public class FormPresenter implements FormItemReceiver {
             result[i] = options.get(i);
         }
         return result;
+    }
+
+    public void saveAnswers(HashMap<String,String> answers){
+        model.saveAnswers(view.getApplicationContext(),answers);
     }
 
     @Override

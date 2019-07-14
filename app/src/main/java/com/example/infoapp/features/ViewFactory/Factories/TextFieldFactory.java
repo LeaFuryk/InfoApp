@@ -5,9 +5,9 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.view.KeyEvent;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.example.infoapp.features.ViewFactory.Helpers.LayoutHelper;
 import com.example.infoapp.features.ViewFactory.ViewFactory;
@@ -27,17 +27,26 @@ public class TextFieldFactory implements ViewFactory {
 
         FormItemView formItemView = LayoutHelper.basicView(context);
 
-        editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        editText.addTextChangedListener(new TextWatcher() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
                 final String answer = editText.getText().toString();
                 if(!answer.equals("")){
                     formItemView.setAnswer(answer);
-                    return true;
                 }
-                return false;
             }
         });
+
         formItemView.setQuestion(question);
         formItemView.addView(editText);
 
