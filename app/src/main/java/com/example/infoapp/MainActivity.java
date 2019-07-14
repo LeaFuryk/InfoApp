@@ -7,11 +7,13 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.infoapp.view.ChooseActivity;
+import com.example.infoapp.view.NameNewFormActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button newFormButton;
+    private Button completeFormButton;
     private Button seeResultsButton;
+    private Button newFormButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,15 +21,27 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         newFormButton = findViewById(R.id.new_form_button);
+        completeFormButton = findViewById(R.id.complete_form_button);
         seeResultsButton = findViewById(R.id.see_results_button);
 
         this.configurateNewFormButton();
+        this.configurateCompleteFormButton();
         this.configurateSeeResultsButton();
 
     }
 
     private void configurateNewFormButton(){
         newFormButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), NameNewFormActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void configurateCompleteFormButton(){
+        completeFormButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ChooseActivity.class);
