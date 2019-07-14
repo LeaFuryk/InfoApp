@@ -18,7 +18,10 @@ public class FormPresenter implements FormItemReceiver {
     public FormPresenter(FormActivity view){
         this.view = view;
         model = new FormViewModel();
-        Form form = model.getForm(view.getApplicationContext(), "form1");
+    }
+
+    public void init(String option){
+        Form form = model.getForm(view.getApplicationContext(), option);
 
         for (FormItem item: form.getItems()) {
             item.execute(this);

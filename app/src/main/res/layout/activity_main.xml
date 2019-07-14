@@ -39,7 +39,7 @@
                     android:layout_marginVertical="20dp"
                     android:textSize="20dp"/>
                 <Button
-                    android:id="@+id/save_data_button"
+                    android:id="@+id/see_results_button"
                     android:layout_width="200dp"
                     android:layout_height="60dp"
                     android:text="See results"

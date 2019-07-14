@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import com.example.infoapp.features.Models.Form;
 import com.example.infoapp.features.Storage.Helpers.FormParser;
 
+import java.util.Set;
+
 public class FormStorage implements Storage<Form> {
 
     private static FormStorage instance;
@@ -13,7 +15,10 @@ public class FormStorage implements Storage<Form> {
     private FormStorage(){}
 
     public static FormStorage getInstance(){
-        return (instance == null) ? new FormStorage() : instance;
+        if (instance == null) {
+            instance = new FormStorage();
+        }
+        return instance;
     }
 
     @Override
@@ -39,5 +44,10 @@ public class FormStorage implements Storage<Form> {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(element.getName(),parsedForm);
         editor.commit();
+    }
+
+    public Set<String> seeAnswers(Context context){
+        SharedPreferences sharedPreferences = context.getSharedPreferences("Forms", Context.MODE_PRIVATE);
+        return sharedPreferences.getAll().keySet();
     }
 }

@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import com.example.infoapp.features.Storage.Helpers.AnswerParser;
 
 import java.util.HashMap;
+import java.util.Set;
 
 public class AnswerStorage implements Storage<HashMap<String,String>> {
 
@@ -14,7 +15,10 @@ public class AnswerStorage implements Storage<HashMap<String,String>> {
     private AnswerStorage(){}
 
     public static AnswerStorage getInstance(){
-        return (instance == null) ? new AnswerStorage() : instance;
+        if (instance == null) {
+            instance = new AnswerStorage();
+        }
+        return instance;
     }
 
     @Override
@@ -44,5 +48,10 @@ public class AnswerStorage implements Storage<HashMap<String,String>> {
         editor.putString(id,parsedAnswers);
         editor.commit();
 
+    }
+
+    public Set<String> seeAnswers(Context context){
+        SharedPreferences sharedPreferences = context.getSharedPreferences("Answers", Context.MODE_PRIVATE);
+        return sharedPreferences.getAll().keySet();
     }
 }

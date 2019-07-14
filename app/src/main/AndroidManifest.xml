@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.FormActivity"></activity>
+        <activity android:name=".view.ResultsActivity"></activity>
+        <activity android:name=".view.ChooseActivity" />
+        <activity android:name=".view.FormActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

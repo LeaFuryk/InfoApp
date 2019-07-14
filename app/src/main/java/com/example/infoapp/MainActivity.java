@@ -6,12 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.infoapp.view.FormActivity;
+import com.example.infoapp.view.ChooseActivity;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button newFormButton;
-    private Button saveDataButton;
+    private Button seeResultsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,10 +19,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         newFormButton = findViewById(R.id.new_form_button);
-        saveDataButton = findViewById(R.id.save_data_button);
+        seeResultsButton = findViewById(R.id.see_results_button);
 
         this.configurateNewFormButton();
-        this.configurateSaveDataButton();
+        this.configurateSeeResultsButton();
 
     }
 
@@ -30,17 +30,20 @@ public class MainActivity extends AppCompatActivity {
         newFormButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), FormActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ChooseActivity.class);
+                intent.putExtra("OPTION", "SEE_FORMS");
                 startActivity(intent);
             }
         });
     }
 
-    private void configurateSaveDataButton() {
-        saveDataButton.setOnClickListener(new View.OnClickListener() {
+    private void configurateSeeResultsButton() {
+        seeResultsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Nothing still
+                Intent intent = new Intent(getApplicationContext(), ChooseActivity.class);
+                intent.putExtra("OPTION", "SEE_RESULTS");
+                startActivity(intent);
             }
         });
     }

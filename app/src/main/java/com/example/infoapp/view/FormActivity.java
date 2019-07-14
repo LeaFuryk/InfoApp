@@ -28,7 +28,9 @@ public class FormActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
-        helper = new FormActivityHelper("form1");
+
+        String option = getIntent().getStringExtra("VALUE");
+        helper = new FormActivityHelper(option);
 
         imageButton = findViewById(R.id.register_button);
         imageButton.setBackgroundResource(R.drawable.tags_rounded_corners);
@@ -52,6 +54,7 @@ public class FormActivity extends AppCompatActivity {
         linearLayout = findViewById(R.id.linear_layout);
 
         presenter = new FormPresenter(this);
+        presenter.init(option);
     }
 
     public void drawItem(final String question, final String[] options, final FormItemType type){
