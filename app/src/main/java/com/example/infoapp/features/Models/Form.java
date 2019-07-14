@@ -3,13 +3,16 @@ package com.example.infoapp.features.Models;
 import java.util.ArrayList;
 
 public class Form {
+    private String name;
     private ArrayList<FormItem> items;
 
-    public Form(){
+    public Form(String name){
+        this.name = name;
         items = new ArrayList<>();
     }
 
-    public Form(ArrayList<FormItem> items){
+    public Form(String name, ArrayList<FormItem> items){
+        this.name= name;
         this.items = items;
     }
 
@@ -23,6 +26,14 @@ public class Form {
 
     public int size(){
         return items.size();
+    }
+
+    public String getName(){
+        return this.name;
+    }
+
+    public void setName(String name){
+        this.name = name;
     }
 
     public ArrayList<FormItem> getItems(){

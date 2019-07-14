@@ -29,4 +29,8 @@ public class FormItemView extends LinearLayout implements AnswerProvider  {
     public void setQuestion(String question) {
         this.question = question;
     }
+
+    public String getQuestion(){
+        return this.question;
+    }
 }

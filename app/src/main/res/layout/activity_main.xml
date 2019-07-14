@@ -42,7 +42,7 @@
                     android:id="@+id/save_data_button"
                     android:layout_width="200dp"
                     android:layout_height="60dp"
-                    android:text="Save data"
+                    android:text="See results"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_gravity="center"

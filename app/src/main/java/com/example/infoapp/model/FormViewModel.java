@@ -1,17 +1,20 @@
 package com.example.infoapp.model;
 
+import android.content.Context;
+
 import com.example.infoapp.features.Models.Form;
+import com.example.infoapp.features.Models.FormItemType;
 import com.example.infoapp.features.Models.OptionItem;
 import com.example.infoapp.features.Models.QuestionItem;
-import com.example.infoapp.features.Models.FormItemType;
+import com.example.infoapp.features.Storage.FormStorage;
 
 import java.util.ArrayList;
 
 public class FormViewModel{
 
-    public Form getForm(){
+    public Form getForm(Context context, String id){
 
-        Form form = new Form();
+        Form form = new Form("form1");
 
         QuestionItem item = new QuestionItem("¿Como es tu nombre?", FormItemType.TEXT_VIEW);
         QuestionItem item1 = new QuestionItem("¿Cual es tu apellido?", FormItemType.TEXT_VIEW);
@@ -35,6 +38,8 @@ public class FormViewModel{
         form.addItem(item4);
         form.addItem(item1);
 
-        return form;
+        FormStorage.getInstance().save(context,form);
+
+        return FormStorage.getInstance().get(context,id);
     }
 }
