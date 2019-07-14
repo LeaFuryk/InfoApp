@@ -2,6 +2,7 @@ package com.example.infoapp.view;
 
 import android.util.Pair;
 
+import com.example.infoapp.features.Exceptions.InvalidAnswerException;
 import com.example.infoapp.features.ViewModels.FormItemView;
 
 import java.util.ArrayList;
@@ -25,11 +26,14 @@ public class FormActivityHelper {
         return items;
     }
 
-    public HashMap<String,String> getAnswers(){
+    public HashMap<String,String> getAnswers() throws InvalidAnswerException {
         HashMap<String, String> answers = new HashMap<>();
         answers.put("id", this.formName);
         for (FormItemView item: items) {
             Pair<String,String> pair = item.answer();
+            if(pair.second == null || pair.second.equals("")){
+                throw new InvalidAnswerException();
+            }
             answers.put(pair.first,pair.second);
         }
         return answers;

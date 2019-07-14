@@ -1,12 +1,16 @@
 package com.example.infoapp.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import com.example.infoapp.MainActivity;
 import com.example.infoapp.R;
+import com.example.infoapp.features.Exceptions.InvalidAnswerException;
 import com.example.infoapp.features.Models.FormItemType;
 import com.example.infoapp.features.ViewFactory.AbstractViewFactory;
 import com.example.infoapp.features.ViewModels.FormItemView;
@@ -31,7 +35,17 @@ public class FormActivity extends AppCompatActivity {
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.saveAnswers(helper.getAnswers());
+                try {
+                    presenter.saveAnswers(helper.getAnswers());
+                    Toast toast = Toast.makeText(getApplicationContext(), "Saved succesfully", Toast.LENGTH_LONG);
+                    toast.show();
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+
+                }catch (InvalidAnswerException e){
+                    Toast toast = Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG);
+                    toast.show();
+                }
             }
         });
 
