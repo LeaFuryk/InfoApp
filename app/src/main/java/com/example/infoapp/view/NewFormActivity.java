@@ -7,15 +7,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import com.example.infoapp.MainActivity;
 import com.example.infoapp.R;
+import com.example.infoapp.features.Models.FormItemType;
+import com.example.infoapp.features.ViewFactory.AbstractViewFactory;
+import com.example.infoapp.features.ViewModels.FormItemView;
+import com.example.infoapp.presenter.NewFormPresenter;
 
 public class NewFormActivity extends AppCompatActivity {
 
     private Button addItemButton;
+    private Button finishFormButton;
     private LinearLayout layout;
 
     private String formName;
+    private NewFormPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +31,19 @@ public class NewFormActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_form);
         Intent intent = getIntent();
         formName = intent.getStringExtra("FORM_NAME");
+        presenter = new NewFormPresenter(this, formName);
 
         layout = findViewById(R.id.new_form_layout);
+
+        finishFormButton = findViewById(R.id.finish_form_button);
+        finishFormButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.saveForm();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         addItemButton = findViewById(R.id.add_item_button);
         addItemButton.setBackgroundResource(R.drawable.tags_rounded_corners);
@@ -43,5 +62,23 @@ public class NewFormActivity extends AppCompatActivity {
         String question = data.getStringExtra("QUESTION");
         String type = data.getStringExtra("TYPE");
         String options = data.getStringExtra("OPTIONS");
+
+        String [] separatedOptions = null;
+
+        if (options != null && !options.equals("")){
+            separatedOptions = options.split(",");
+        }
+
+        presenter.addItem(question,type,separatedOptions);
+    }
+
+    public void showToast(String message){
+        Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG);
+        toast.show();
+    }
+
+    public void drawItem(String question, FormItemType type, String [] options){
+        FormItemView item = AbstractViewFactory.provide(this, type, question, options);
+        layout.addView(item);
     }
 }

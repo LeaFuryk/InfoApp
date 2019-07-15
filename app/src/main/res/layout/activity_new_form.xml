@@ -40,6 +40,18 @@
                 android:backgroundTint="@color/colorPrimary"
                 android:textColor="#FFFFFF"/>
 
+            <Button
+                android:id="@+id/finish_form_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DONE"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="5dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:textColor="#FFFFFF"/>
+
         </LinearLayout>
 
     </ScrollView>

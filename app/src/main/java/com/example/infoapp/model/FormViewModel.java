@@ -3,6 +3,7 @@ package com.example.infoapp.model;
 import android.content.Context;
 
 import com.example.infoapp.features.Models.Form;
+import com.example.infoapp.features.Models.FormItem;
 import com.example.infoapp.features.Models.FormItemType;
 import com.example.infoapp.features.Models.OptionItem;
 import com.example.infoapp.features.Models.QuestionItem;
@@ -27,12 +28,12 @@ public class FormViewModel{
         colors.add("Azul");
         colors.add("Amarillo");
 
-        QuestionItem item3 = new OptionItem("Color Favorito: ", FormItemType.RADIO_GROUP, colors);
+        FormItem item3 = new OptionItem("Color Favorito: ", FormItemType.RADIO_GROUP, colors);
 
         ArrayList<String> politicians = new ArrayList<>();
         politicians.add("Izquierda");
         politicians.add("Derecha");
-        QuestionItem item4 = new OptionItem("¿Cual es tu posicion politica?", FormItemType.SPINNER, politicians);
+        FormItem item4 = new OptionItem("¿Cual es tu posicion politica?", FormItemType.SPINNER, politicians);
 
         form.addItem(item);
         form.addItem(item2);

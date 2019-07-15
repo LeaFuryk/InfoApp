@@ -1,33 +1,13 @@
 package com.example.infoapp.features.Models;
 
-public class QuestionItem implements FormItem {
+public class QuestionItem extends AbstractFormItem implements FormItem {
 
-    private String question;
-    private FormItemType type;
-
-    public QuestionItem(String question, FormItemType type){
-        this.question = question;
-        this.type = type;
-    }
-
-    public String getQuestion() {
-        return question;
-    }
-
-    public void setQuestion(String question) {
-        this.question = question;
-    }
-
-    public FormItemType getType(){
-        return this.type;
-    }
-
-    public void setType(FormItemType type) {
-        this.type = type;
+    public QuestionItem(String question, FormItemType type) {
+        super(question, type);
     }
 
     @Override
     public void execute(FormItemReceiver actioner) {
-        actioner.receive(this.question, null, this.type);
+        actioner.receive(this.getQuestion(), null, this.getType());
     }
 }

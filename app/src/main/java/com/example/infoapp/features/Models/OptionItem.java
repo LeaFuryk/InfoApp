@@ -2,7 +2,7 @@ package com.example.infoapp.features.Models;
 
 import java.util.ArrayList;
 
-public class OptionItem extends QuestionItem implements FormItem {
+public class OptionItem extends AbstractFormItem implements FormItem {
 
     private ArrayList<String> options;
 
