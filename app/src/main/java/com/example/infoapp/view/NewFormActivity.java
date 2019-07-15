@@ -40,6 +40,8 @@ public class NewFormActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+        String question = data.getStringExtra("QUESTION");
+        String type = data.getStringExtra("TYPE");
+        String options = data.getStringExtra("OPTIONS");
     }
 }

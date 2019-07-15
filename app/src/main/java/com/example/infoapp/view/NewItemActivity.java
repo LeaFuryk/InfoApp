@@ -1,5 +1,7 @@
 package com.example.infoapp.view;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +9,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.infoapp.R;
 import com.example.infoapp.features.Models.FormItemType;
@@ -53,6 +56,31 @@ public class NewItemActivity extends AppCompatActivity {
         layout.addView(itemType);
 
         this.addOptionButton();
+
+        this.itemOkButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(question.answer().second == null || itemType.answer().second == null){
+                    Toast toast = Toast.makeText(getApplicationContext(), "Question and ItemType must NOT be null", Toast.LENGTH_LONG);
+                    toast.show();
+                }else{
+                    String optionsString = "";
+
+                    for(FormItemView item : options){
+                        if(item.answer().second != null && !item.answer().second.equals("")){
+                            optionsString += item.answer().second +",";
+                        }
+                    }
+                    Intent intent = getIntent();
+                    intent.putExtra("QUESTION", question.answer().second);
+                    intent.putExtra("TYPE", itemType.answer().second);
+                    intent.putExtra("OPTIONS", optionsString);
+                    setResult(Activity.RESULT_OK,intent);
+                    finish();
+                }
+            }
+        });
     }
 
     private void addOptionButton(){
