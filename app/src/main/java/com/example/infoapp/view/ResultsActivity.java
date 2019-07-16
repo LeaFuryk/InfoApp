@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.infoapp.R;
 import com.example.infoapp.presenter.ResultsPresenter;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ResultsActivity extends AppCompatActivity {
@@ -33,13 +34,20 @@ public class ResultsActivity extends AppCompatActivity {
     }
 
     private void configure(){
-        HashMap<String,String> values = this.presenter.getAnswers(this.option);
+        ArrayList<HashMap<String,String>> values = this.presenter.getAnswers(this.option);
+        for(HashMap<String,String> map: values){
 
-        for (String key: values.keySet()){
-            TextView textView = this.getTextView();
-            String text = key + ": "+ values.get(key);
-            textView.setText(text);
-            this.layout.addView(textView);
+            TextView titleView = this.getTextView();
+            String titleText = "Answer: ";
+            titleView.setText(titleText);
+            this.layout.addView(titleView);
+
+            for (String key: map.keySet()){
+                TextView textView = this.getTextView();
+                String text = key + ": "+ map.get(key);
+                textView.setText(text);
+                this.layout.addView(textView);
+            }
         }
     }
 

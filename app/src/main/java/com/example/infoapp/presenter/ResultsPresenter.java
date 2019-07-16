@@ -3,6 +3,7 @@ package com.example.infoapp.presenter;
 import com.example.infoapp.features.Storage.AnswerStorage;
 import com.example.infoapp.view.ResultsActivity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ResultsPresenter {
@@ -12,7 +13,7 @@ public class ResultsPresenter {
         this.view = view;
     }
 
-    public HashMap<String,String> getAnswers(String option){
+    public ArrayList<HashMap<String,String>> getAnswers(String option){
         return AnswerStorage.getInstance().get(view.getApplicationContext(), option);
     }
 }

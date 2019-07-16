@@ -8,7 +8,7 @@ import com.example.infoapp.features.Storage.Helpers.FormParser;
 
 import java.util.Set;
 
-public class FormStorage implements Storage<Form> {
+public class FormStorage{
 
     private static FormStorage instance;
 
@@ -21,7 +21,6 @@ public class FormStorage implements Storage<Form> {
         return instance;
     }
 
-    @Override
     public Form get(Context context, String id) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("Forms", Context.MODE_PRIVATE);
 
@@ -35,7 +34,6 @@ public class FormStorage implements Storage<Form> {
         }
     }
 
-    @Override
     public void save(Context context, Form element) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("Forms", Context.MODE_PRIVATE);
         FormParser parser = new FormParser();
