@@ -1,12 +1,14 @@
 package com.example.infoapp.features.Models;
 
+import android.support.annotation.NonNull;
+
 import java.util.ArrayList;
 
 public class OptionItem extends AbstractFormItem implements FormItem {
 
     private ArrayList<String> options;
 
-    public OptionItem(String question, FormItemType type, ArrayList<String> options) {
+    public OptionItem(@NonNull final String question, @NonNull final FormItemType type, @NonNull final ArrayList<String> options) {
         super(question, type);
         this.options = options;
     }
@@ -15,20 +17,20 @@ public class OptionItem extends AbstractFormItem implements FormItem {
         return options;
     }
 
-    public void addOption(String option){
+    public void addOption(final String option){
         options.add(option);
     }
 
-    public String getOption(int index){
+    public String getOption(final int index){
         return options.get(index);
     }
 
-    public void removeOption(int index){
+    public void removeOption(final int index){
         options.remove(index);
     }
 
     @Override
-    public void execute(FormItemReceiver actioner) {
+    public void execute(@NonNull final FormItemReceiver actioner) {
         actioner.receive(super.getQuestion(),this.getOptions(), super.getType());
     }
 }

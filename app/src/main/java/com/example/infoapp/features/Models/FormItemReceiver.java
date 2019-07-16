@@ -7,6 +7,6 @@ import java.util.ArrayList;
 
 public interface FormItemReceiver {
 
-    void receive(@NonNull String question, @Nullable ArrayList<String> options, @NonNull FormItemType type);
+    void receive(@NonNull final String question, @Nullable final ArrayList<String> options, @NonNull final FormItemType type);
 
 }

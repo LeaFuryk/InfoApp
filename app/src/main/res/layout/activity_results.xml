@@ -11,18 +11,26 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Results:"
-        android:layout_marginTop="130dp"
+        android:text="@string/results"
+        android:layout_marginTop="100dp"
         android:gravity="center"
-        android:textSize="60dp"
+        android:textSize="60sp"
         android:textColor="@android:color/white"
         />
 
-    <LinearLayout
-        android:id="@+id/results_list"
-        android:orientation="vertical"
-        android:layout_marginTop="100dp"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp">
+
+        <LinearLayout
+            android:id="@+id/results_list"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </ScrollView>
+
 
 </LinearLayout>

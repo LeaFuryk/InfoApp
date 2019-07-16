@@ -9,6 +9,9 @@ import com.example.infoapp.view.NewFormActivity;
 
 public class NewFormPresenter {
 
+    private static final String SUCCESSFUL_SENTENCE = "Form saved succesfully";
+    private static final String FAILURE_SENTENCE = "You can't save an empty form";
+
     private NewFormActivity view;
     private Form form;
 
@@ -30,9 +33,9 @@ public class NewFormPresenter {
     public void saveForm(){
         if (this.form.getItems().size() > 0){
             FormStorage.getInstance().save(view.getApplicationContext(), form);
-            view.showToast("Form saved succesfully");
+            view.showToast(SUCCESSFUL_SENTENCE);
         }else {
-            view.showToast("You cant save an empty form");
+            view.showToast(FAILURE_SENTENCE);
         }
     }
 }

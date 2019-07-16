@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 public class AnswerParser {
 
-    public String parse(HashMap<String,String> answers, String previousAnswers){
+    public String parse(final HashMap<String,String> answers, final String previousAnswers){
 
         String parsedAnswers = "";
         for (String key: answers.keySet()) {
@@ -18,9 +18,9 @@ public class AnswerParser {
     }
 
     public ArrayList<HashMap<String,String>> parse(String answers){
-        ArrayList<HashMap<String,String>> answersParsed = new ArrayList<>();
+        final ArrayList<HashMap<String,String>> answersParsed = new ArrayList<>();
 
-        String [] separatedAnswers = answers.split(";");
+        final String [] separatedAnswers = answers.split(";");
         for(int i = 0; i < separatedAnswers.length; i++){
             if(!separatedAnswers[i].equals("")){
                 answersParsed.add(this.parseAnswer(separatedAnswers[i]));
@@ -32,12 +32,12 @@ public class AnswerParser {
 
     private HashMap<String,String> parseAnswer(String answers){
 
-        HashMap<String,String> map = new HashMap<>();
+        final HashMap<String,String> map = new HashMap<>();
 
-        String [] separatedAnswers = answers.split(",");
-        for (String answer: separatedAnswers) {
-            if(answer != ""){
-                String [] splitted = answer.split(":");
+        final String [] separatedAnswers = answers.split(",");
+        for (final String answer: separatedAnswers) {
+            if(!answer.equals("")){
+                final String [] splitted = answer.split(":");
                 map.put(splitted[0], splitted[1]);
             }
         }

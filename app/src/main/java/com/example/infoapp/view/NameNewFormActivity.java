@@ -20,6 +20,11 @@ public class NameNewFormActivity extends AppCompatActivity {
     private LinearLayout layout;
     private Button nextButton;
 
+    private static final String INTENT_FORM_NAME_VALUE = "FORM_NAME";
+    private static final String ERROR_SENTENCE = "Name must NOT be null";
+    private static final String INSERT_NAME_SENTENCE = "Insert your form name: ";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +32,7 @@ public class NameNewFormActivity extends AppCompatActivity {
 
         layout = findViewById(R.id.name_new_form);
 
-        FormItemView itemView = AbstractViewFactory.provide(this, FormItemType.TEXT_VIEW,"Insert your form name: ",null);
+        FormItemView itemView = AbstractViewFactory.provide(this, FormItemType.TEXT_VIEW,INSERT_NAME_SENTENCE,null);
         itemView.setGravity(CENTER);
         layout.addView(itemView);
 
@@ -39,10 +44,10 @@ public class NameNewFormActivity extends AppCompatActivity {
                 if(itemView.answer().second != null){
                     String answer = itemView.answer().second;
                     Intent intent = new Intent(getApplicationContext(),NewFormActivity.class);
-                    intent.putExtra("FORM_NAME", answer);
+                    intent.putExtra(INTENT_FORM_NAME_VALUE, answer);
                     startActivity(intent);
                 }else {
-                    Toast toast = Toast.makeText(getApplicationContext(), "Name must NOT be null", Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(getApplicationContext(), ERROR_SENTENCE, Toast.LENGTH_LONG);
                     toast.show();
                 }
             }

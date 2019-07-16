@@ -11,10 +11,10 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="New Form"
+        android:text="@string/main_new_form"
         android:layout_marginTop="130dp"
         android:gravity="center"
-        android:textSize="60dp"
+        android:textSize="60sp"
         android:textColor="@android:color/white"
         />
 
@@ -23,13 +23,13 @@
         android:orientation="vertical"
         android:layout_marginTop="100dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></LinearLayout>
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/next_button"
         android:layout_width="200dp"
         android:layout_height="60dp"
-        android:text="Next"
+        android:text="@string/new_form_next"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_gravity="center"

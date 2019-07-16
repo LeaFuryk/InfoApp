@@ -18,15 +18,15 @@ public class FormParser implements FormItemReceiver {
 
     public Form parse(String form){
 
-        String [] items = form.split(";");
+        final String [] items = form.split(";");
 
         //Getting de form name
-        String [] name = items[0].split("name:");
-        Form parsedForm = new Form(name[1]);
+        final String [] name = items[0].split("name:");
+        final Form parsedForm = new Form(name[1]);
 
         //Get each item
         for (int i = 1; i< items.length; i++){
-            FormItem item = this.parseItem(items[i]);
+            final FormItem item = this.parseItem(items[i]);
             parsedForm.addItem(item);
         }
 
@@ -36,7 +36,7 @@ public class FormParser implements FormItemReceiver {
     public String parse(Form form){
         this.parse = "";
         parse += "name:" +form.getName() +";";
-        for (FormItem item: form.getItems()) {
+        for (final FormItem item: form.getItems()) {
             this.parse += "item:[";
             item.execute(this);
             this.parse +="];";
@@ -72,17 +72,17 @@ public class FormParser implements FormItemReceiver {
                 values = item.substring(i +1, item.length()-1);
             }
         }
-        String [] separatedValues = values.split(",");
+        final String [] separatedValues = values.split(",");
 
-        String question = separatedValues[0].split(":")[1];
-        String type = separatedValues[1].split(":")[1];
+        final String question = separatedValues[0].split(":")[1];
+        final String type = separatedValues[1].split(":")[1];
 
         ArrayList<String> options = null;
         if (separatedValues.length > 2){
             options = this.parseOptions(separatedValues[2]);
         }
 
-        FormItem formItem;
+        final FormItem formItem;
         if(options != null){
             formItem = new OptionItem(question,FormItemType.valueOf(type),options);
         }else{
@@ -103,7 +103,7 @@ public class FormParser implements FormItemReceiver {
             }
         }
 
-        String [] finalOptions = parsedOptions.split("-");
+        final String [] finalOptions = parsedOptions.split("-");
 
         ArrayList<String> optionsArray = new ArrayList<>();
         for(int i= 0; i<finalOptions.length; i++){

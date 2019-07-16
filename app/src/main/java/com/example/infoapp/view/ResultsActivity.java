@@ -16,6 +16,8 @@ import java.util.HashMap;
 
 public class ResultsActivity extends AppCompatActivity {
 
+    private static final String OPTION_EXTRA_VALUE = "VALUE";
+
     private LinearLayout layout;
     private ResultsPresenter presenter;
     private String option;
@@ -25,7 +27,7 @@ public class ResultsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
 
-        this.option = getIntent().getStringExtra("VALUE");
+        this.option = getIntent().getStringExtra(OPTION_EXTRA_VALUE);
         layout = findViewById(R.id.results_list);
 
         presenter = new ResultsPresenter(this);

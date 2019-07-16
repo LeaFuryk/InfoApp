@@ -18,6 +18,11 @@ import com.example.infoapp.presenter.NewFormPresenter;
 
 public class NewFormActivity extends AppCompatActivity {
 
+    private static final String INTENT_QUESTION_VALUE = "QUESTION";
+    private static final String INTENT_TYPE_VALUE = "TYPE";
+    private static final String INTENT_OPTIONS_VALUE = "OPTIONS";
+    private static final String INTENT_FORM_NAME_VALUE = "FORM_NAME";
+
     private Button addItemButton;
     private Button finishFormButton;
     private LinearLayout layout;
@@ -30,7 +35,7 @@ public class NewFormActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_form);
         Intent intent = getIntent();
-        formName = intent.getStringExtra("FORM_NAME");
+        formName = intent.getStringExtra(INTENT_FORM_NAME_VALUE);
         presenter = new NewFormPresenter(this, formName);
 
         layout = findViewById(R.id.new_form_layout);
@@ -59,9 +64,9 @@ public class NewFormActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        String question = data.getStringExtra("QUESTION");
-        String type = data.getStringExtra("TYPE");
-        String options = data.getStringExtra("OPTIONS");
+        String question = data.getStringExtra(INTENT_QUESTION_VALUE);
+        String type = data.getStringExtra(INTENT_TYPE_VALUE);
+        String options = data.getStringExtra(INTENT_OPTIONS_VALUE);
 
         String [] separatedOptions = null;
 

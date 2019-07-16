@@ -18,6 +18,9 @@ import com.example.infoapp.presenter.FormPresenter;
 
 public class FormActivity extends AppCompatActivity {
 
+    private static final String OPTION_VALUE = "VALUE";
+    private static final String WELL_SAVED_SENTENCE = "Saved succesfully";
+
     private LinearLayout linearLayout;
     private Button imageButton;
 
@@ -29,7 +32,7 @@ public class FormActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
 
-        String option = getIntent().getStringExtra("VALUE");
+        String option = getIntent().getStringExtra(OPTION_VALUE);
         helper = new FormActivityHelper(option);
 
         imageButton = findViewById(R.id.register_button);
@@ -39,7 +42,7 @@ public class FormActivity extends AppCompatActivity {
             public void onClick(View v) {
                 try {
                     presenter.saveAnswers(helper.getAnswers());
-                    Toast toast = Toast.makeText(getApplicationContext(), "Saved succesfully", Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(getApplicationContext(), WELL_SAVED_SENTENCE, Toast.LENGTH_LONG);
                     toast.show();
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);

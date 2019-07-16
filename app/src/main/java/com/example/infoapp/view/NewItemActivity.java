@@ -20,6 +20,16 @@ import java.util.ArrayList;
 
 public class NewItemActivity extends AppCompatActivity {
 
+    private static final String INTENT_QUESTION_VALUE = "QUESTION";
+    private static final String INTENT_TYPE_VALUE = "TYPE";
+    private static final String INTENT_OPTIONS_VALUE = "OPTIONS";
+
+    private static final String INSERT_QUESTION_SENTENCE = "Insert your question: ";
+    private static final String CHOOSE_OPTION_SENTENCE = "Choose the type: ";
+    private static final String INSERT_OPTION_SENTENCE = "Insert option";
+
+    private static final String ERROR_SENTENCE = "Question and ItemType must NOT be null";
+
     private LinearLayout layout;
     private Button itemOkButton;
 
@@ -43,7 +53,7 @@ public class NewItemActivity extends AppCompatActivity {
     }
 
     private void configure(){
-        question = AbstractViewFactory.provide(getApplicationContext(), FormItemType.TEXT_VIEW,"Insert your question: ",null);
+        question = AbstractViewFactory.provide(getApplicationContext(), FormItemType.TEXT_VIEW,INSERT_QUESTION_SENTENCE,null);
         layout.addView(question);
 
         String [] types = new String[FormItemType.values().length];
@@ -52,7 +62,7 @@ public class NewItemActivity extends AppCompatActivity {
             types[i] = FormItemType.values()[i].name();
         }
 
-        itemType = AbstractViewFactory.provide(getApplicationContext(), FormItemType.RADIO_GROUP,"Choose the type: ", types);
+        itemType = AbstractViewFactory.provide(getApplicationContext(), FormItemType.RADIO_GROUP,CHOOSE_OPTION_SENTENCE, types);
         layout.addView(itemType);
 
         this.addOptionButton();
@@ -62,7 +72,7 @@ public class NewItemActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if(question.answer().second == null || itemType.answer().second == null){
-                    Toast toast = Toast.makeText(getApplicationContext(), "Question and ItemType must NOT be null", Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(getApplicationContext(), ERROR_SENTENCE, Toast.LENGTH_LONG);
                     toast.show();
                 }else{
                     String optionsString = "";
@@ -73,9 +83,9 @@ public class NewItemActivity extends AppCompatActivity {
                         }
                     }
                     Intent intent = getIntent();
-                    intent.putExtra("QUESTION", question.answer().second);
-                    intent.putExtra("TYPE", itemType.answer().second);
-                    intent.putExtra("OPTIONS", optionsString);
+                    intent.putExtra(INTENT_QUESTION_VALUE, question.answer().second);
+                    intent.putExtra(INTENT_TYPE_VALUE, itemType.answer().second);
+                    intent.putExtra(INTENT_OPTIONS_VALUE, optionsString);
                     setResult(Activity.RESULT_OK,intent);
                     finish();
                 }
@@ -85,7 +95,7 @@ public class NewItemActivity extends AppCompatActivity {
 
     private void addOptionButton(){
         Button button = new Button(this.getApplicationContext());
-        button.setText("Add option");
+        button.setText(R.string.add_option_new_item);
         button.setGravity(Gravity.CENTER);
         button.setBackgroundColor(Color.parseColor("#3770DF"));
         button.setTextColor(Color.WHITE);
@@ -93,7 +103,7 @@ public class NewItemActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FormItemView itemView = AbstractViewFactory.provide(getApplicationContext(), FormItemType.TEXT_VIEW,"Insert option",null);
+                FormItemView itemView = AbstractViewFactory.provide(getApplicationContext(), FormItemType.TEXT_VIEW,INSERT_OPTION_SENTENCE,null);
                 options.add(itemView);
                 layout.addView(itemView);
             }

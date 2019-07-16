@@ -17,6 +17,11 @@ import java.util.Set;
 
 public class ChooseActivity extends AppCompatActivity {
 
+    private static final String OPTION_VALUE = "VALUE";
+    private static final String OPTION_INTENT_VALUE = "OPTION";
+    private static final String OPTION_SEE_ANSWERS_VALUE = "SEE_RESULTS";
+
+
     private ChoosePresenter presenter;
     private String option;
     private LinearLayout layout;
@@ -27,7 +32,7 @@ public class ChooseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_choose);
 
         Intent intent = getIntent();
-        this.option = intent.getStringExtra("OPTION");
+        this.option = intent.getStringExtra(OPTION_INTENT_VALUE);
 
         layout = findViewById(R.id.option_list);
 
@@ -37,7 +42,7 @@ public class ChooseActivity extends AppCompatActivity {
 
     private void configure(){
         Set<String> options = null;
-        if(option.equals("SEE_RESULTS")){
+        if(option.equals(OPTION_SEE_ANSWERS_VALUE)){
             options = presenter.seeAnswers();
         }else{
             options = presenter.seeForms();
@@ -67,12 +72,12 @@ public class ChooseActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent;
-                if(option.equals("SEE_RESULTS")){
+                if(option.equals(OPTION_SEE_ANSWERS_VALUE)){
                    intent = new Intent(getApplicationContext(), ResultsActivity.class);
                 }else{
                    intent = new Intent(getApplicationContext(), FormActivity.class);
                 }
-                intent.putExtra("VALUE", button.getText());
+                intent.putExtra(OPTION_VALUE, button.getText());
                 startActivity(intent);
             }
         });

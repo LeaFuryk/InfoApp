@@ -11,6 +11,10 @@ import com.example.infoapp.view.NameNewFormActivity;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String OPTION_INTENT_VALUE = "OPTION";
+    private static final String OPTION_SEE_FORMS_VALUE = "SEE_FORMS";
+    private static final String OPTION_SEE_ANSWERS_VALUE = "SEE_RESULTS";
+
     private Button completeFormButton;
     private Button seeResultsButton;
     private Button newFormButton;
@@ -45,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ChooseActivity.class);
-                intent.putExtra("OPTION", "SEE_FORMS");
+                intent.putExtra(OPTION_INTENT_VALUE, OPTION_SEE_FORMS_VALUE);
                 startActivity(intent);
             }
         });
@@ -56,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ChooseActivity.class);
-                intent.putExtra("OPTION", "SEE_RESULTS");
+                intent.putExtra(OPTION_INTENT_VALUE, OPTION_SEE_ANSWERS_VALUE);
                 startActivity(intent);
             }
         });

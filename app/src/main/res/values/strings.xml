@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">InfoApp</string>
     <string name="register">Complete Forms</string>
+    <string name="add_option_new_item">Add option</string>
+    <string name="choose_the_option">Choose the option!</string>
+    <string name="infoapp_title">InfoApp</string>
+    <string name="main_new_form">New Form</string>
+    <string name="main_see_results">See results</string>
+    <string name="new_form_next">Next</string>
+    <string name="add_new_item">+</string>
+    <string name="new_form_done">DONE</string>
+    <string name="new_item">New Item</string>
+    <string name="ok">OK</string>
+    <string name="results">Results:</string>
 </resources>
